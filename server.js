@@ -99,4 +99,11 @@ wss.on('connection', (ws, req) => {
         if (username) clients.delete(username);
     });
 });
+const PORT = process.env.PORT || 8080;
+server.keepAliveTimeout = 120000;
+server.headersTimeout = 120000;
+server.listen(PORT, '0.0.0.0', () => {
+    console.log(`Server running on http://0.0.0.0:${PORT}`);
+    console.log(`WebSocket server running on ws://0.0.0.0:${PORT}`);
+});
 
