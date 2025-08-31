@@ -5,7 +5,7 @@ function connect() {
     const username = usernameInput.value.trim();
     if (!username) return alert('Enter username');
     if (ws && ws.readyState === WebSocket.OPEN) return; // Prevent reconnect
-    ws = new WebSocket('wss://10.42.33.76:8080'); // secure connection
+    ws = new WebSocket('wss://81.213.40.197:8080'); // secure connection
     ws.onopen = () => {
         ws.send(JSON.stringify({ username }));
         document.getElementById('chat').innerHTML += `<div><em>Connected as ${username}</em></div>`;
@@ -34,3 +34,4 @@ function sendMessage() {
         input.value = '';
     }
 }
+
