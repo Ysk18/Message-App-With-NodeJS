@@ -13,8 +13,11 @@ const options = {
     cert: fs.readFileSync('cert.pem')
 };
 
-// Create HTTPS server
-const server = https.createServer(options);
+// Create HTTPS server with HTTP response for Render
+const server = https.createServer(options, (req, res) => {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end('Server is running!');
+});
 const wss = new WebSocket.Server({ server });
 
 function broadcast(sender, message) {
