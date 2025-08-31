@@ -99,9 +99,4 @@ wss.on('connection', (ws, req) => {
         if (username) clients.delete(username);
     });
 });
-    console.log(`Server running on http://0.0.0.0:${PORT}`);
-    console.log(`WebSocket server running on ws://0.0.0.0:${PORT}`);
-    console.log(`Server running on https://0.0.0.0:${PORT}`);
-    console.log(`WebSocket server running on wss://0.0.0.0:${PORT}`);
-    console.log('NOTE: You must generate key.pem and cert.pem for HTTPS.');
-    console.log('For testing, use: openssl req -newkey rsa:2048 -nodes -keyout key.pem -x509 -days 365 -out cert.pem');
+
