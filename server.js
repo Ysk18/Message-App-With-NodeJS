@@ -105,9 +105,11 @@ wss.on('connection', (ws, req) => {
 });
 
 const PORT = process.env.PORT || 8080;
-server.listen(PORT, () => {
-    console.log(`Server running on https://localhost:${PORT}`);
-    console.log(`WebSocket server running on wss://localhost:${PORT}`);
+server.keepAliveTimeout = 120000;
+server.headersTimeout = 120000;
+server.listen(PORT, '0.0.0.0', () => {
+    console.log(`Server running on https://0.0.0.0:${PORT}`);
+    console.log(`WebSocket server running on wss://0.0.0.0:${PORT}`);
     console.log('NOTE: You must generate key.pem and cert.pem for HTTPS.');
     console.log('For testing, use: openssl req -newkey rsa:2048 -nodes -keyout key.pem -x509 -days 365 -out cert.pem');
 });
