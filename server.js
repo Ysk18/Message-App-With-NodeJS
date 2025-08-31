@@ -8,13 +8,9 @@ const https = require('https');
 const clients = new Map(); // username -> ws
 
 // Load self-signed certs (generate with openssl if needed)
-const options = {
-    key: fs.readFileSync('key.pem'),
-    cert: fs.readFileSync('cert.pem')
-};
-
-// Create HTTPS server with HTTP response for Render
-const server = https.createServer(options, (req, res) => {
+const http = require('http');
+// Create HTTP server with HTTP response for Render
+const server = http.createServer((req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
     res.end('Server is running!');
 });
@@ -103,13 +99,9 @@ wss.on('connection', (ws, req) => {
         if (username) clients.delete(username);
     });
 });
-
-const PORT = process.env.PORT || 8080;
-server.keepAliveTimeout = 120000;
-server.headersTimeout = 120000;
-server.listen(PORT, '0.0.0.0', () => {
+    console.log(`Server running on http://0.0.0.0:${PORT}`);
+    console.log(`WebSocket server running on ws://0.0.0.0:${PORT}`);
     console.log(`Server running on https://0.0.0.0:${PORT}`);
     console.log(`WebSocket server running on wss://0.0.0.0:${PORT}`);
     console.log('NOTE: You must generate key.pem and cert.pem for HTTPS.');
     console.log('For testing, use: openssl req -newkey rsa:2048 -nodes -keyout key.pem -x509 -days 365 -out cert.pem');
-});
